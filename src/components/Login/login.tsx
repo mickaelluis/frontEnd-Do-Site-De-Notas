@@ -30,7 +30,9 @@ const Login = () => {
        const response = await loginUser(email, password);
       // Salva o token no localStorage (ou outro mecanismo de armazenamento)
       const token = response.token;
+      const name = response.name;
       localStorage.setItem('token', token);
+      localStorage.setItem('name', name);
       // Atualiza o estado de autenticação no contexto
       setLoading(true);
       navigate('/newNotes'); // Redireciona o usuário para a página "newNotes"

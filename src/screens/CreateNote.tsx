@@ -11,6 +11,7 @@ import {
     Heading,
     } from '@chakra-ui/react';
 import { postNote } from '../services/api.ts';	
+import AvatarComponent  from '../components/Avatar/avatar.tsx'; 
 
 export default function CreateNotes() {
     const [title, setTitle] = useState('');
@@ -30,6 +31,7 @@ export default function CreateNotes() {
        };
     return (
         <Box maxW="600px" mx="auto" mt="6">
+          <AvatarComponent />
       <Heading as="h2" size="lg" mb="6" textAlign="center">
         Create New Note
       </Heading>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Heading, Text, Button, Stack, Flex, Spacer, Link} from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { getNotes } from '../services/api.ts'; 	
+import { getNotes } from '../services/api.ts';
+import AvatarComponent  from '../components/Avatar/avatar.tsx';      	
 
 export default function ViewNote() {
     const [notes, setNotes ] = useState([]); 
@@ -31,6 +32,7 @@ export default function ViewNote() {
 
       return (
         <Box maxW="800px" mx="auto" mt="6">
+        <AvatarComponent />
       <Heading as="h2" size="lg" mb="6" textAlign="center">
         Suas Notas
       </Heading>
