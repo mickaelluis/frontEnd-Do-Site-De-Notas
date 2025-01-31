@@ -19,7 +19,7 @@ const AppRoutes = () => (
         <Route element={<PrivateRoute />}>
         <Route path="/newNotes" element={<Notes />} />
         <Route path="/viewNotes" element={<ViewNotes />} />
-        <Route path="/edit-note/:id" element={<EditNotes />} />
+        <Route path="/edit-note" element={<EditNotes />} />
         </Route>
     </Routes>
         </AuthProvider>

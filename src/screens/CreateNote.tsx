@@ -24,6 +24,7 @@ export default function CreateNotes() {
         setTitle('');
         setContent('');
         navigate('/viewNotes');
+        window.location.reload();
       };
 
       const Nota = () => { 

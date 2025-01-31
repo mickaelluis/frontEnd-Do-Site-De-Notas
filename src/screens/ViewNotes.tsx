@@ -2,17 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Box, Heading, Text, Button, Stack, Flex, Spacer, Link} from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { getNotes } from '../services/api.ts';
-import AvatarComponent  from '../components/Avatar/avatar.tsx';      	
+import AvatarComponent  from '../components/Avatar/avatar.tsx';    
+import { EditNote, deleteNote } from '../services/api.ts';  	
 
 export default function ViewNote() {
     const [notes, setNotes ] = useState([]); 
-    
     const navigate = useNavigate();
 
-    const handleEdit = (id: number) => {
-        // Navega para a página de edição com o ID da nota
-        navigate(`/edit-note/${id}`);
-      };
       useEffect(() => {const fetchNotes = async () => {
         const token = localStorage.getItem('token'); // Pega o token do localStorage
         try {
@@ -29,9 +25,19 @@ export default function ViewNote() {
     }, []);
 
 
+     // Função para excluir uma nota
+     const handleDelete = async (noteId: string) => {
+      const token = localStorage.getItem('token'); // Pegando o token
+      try {
+        await deleteNote(noteId, token); // Chama a função deleteNote da API com o ID correto
+        setNotes(notes.filter((note) => note._id !== noteId)); // Remove a nota deletada do estado
+      } catch (error) {
+        console.error('Erro ao deletar a nota:', error);
+      }
+    };
 
       return (
-        <Box maxW="800px" mx="auto" mt="6">
+        <Box maxW="800px" mx="auto" mt="6" >
         <AvatarComponent />
       <Heading as="h2" size="lg" mb="6" textAlign="center">
         Suas Notas
@@ -43,11 +49,11 @@ export default function ViewNote() {
             <Heading as="h3" size="md"> {note.title} </Heading>
             <Text mt={2}> {note.body} </Text>
             <Flex justify="flex-end" mt={2}>
-              <Button colorScheme="blue" size="sm" onClick={() => handleEdit(note.id)}>
+              <Button colorScheme="blue" size="sm" onClick={EditNote}>
                 Editar
               </Button>
               <Spacer />
-              <Button  colorScheme="red" size="sm" onClick={() => handleEdit(note.id)}>
+              <Button  colorScheme="red" size="sm"  onClick={() => handleDelete(note._id)}>
                 Excluir
               </Button>
             </Flex>           
@@ -55,12 +61,12 @@ export default function ViewNote() {
         ))) : (
           <p>Nenhuma nota encontrada</p> // Mensagem para caso não tenha notas
         )} 
-      </Stack>
         <Link href={'http://localhost:3000/newNotes'} size="sm" > 
         <Button  colorScheme="green" size="sm" >
                Criar novas notas
         </Button>
         </Link>
+      </Stack>
     </Box>
       )
 }

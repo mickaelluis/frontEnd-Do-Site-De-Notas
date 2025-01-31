@@ -66,3 +66,38 @@ export const getNotes = async (token: string | null) => {
     console.error("Erro ao buscar as notas:", error);
   }
 }
+
+export const deleteNote = async (noteId: string, token: string | null) => {
+  try {
+    await axios.delete(`${API_URL}/notes/${noteId}`, { // O ID da nota é passado na URL
+      headers: {
+        'x-access-token': token
+      }
+    });
+    console.log('Nota deletada com sucesso');
+  } catch (error) {
+    console.error('Erro ao deletar a nota:', error);
+    throw error;
+  }
+};
+
+export const EditNote = async (noteId: string, title: string, content: string, token: string | null) => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await axios.put(`${API_URL}/notes/${noteId}`, {
+      'title': title,
+      'body': content,
+    }, {
+      headers: {
+        'x-access-token': token, // Enviando o token no cabeçalho
+        'Content-Type': 'application/json', // Informando o tipo de conteúdo
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao editar a nota:", error);
+  }
+
+
+
+}
