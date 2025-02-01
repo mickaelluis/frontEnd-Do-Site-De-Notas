@@ -3,7 +3,7 @@ import { Box, Heading, Text, Button, Stack, Flex, Spacer, Link} from '@chakra-ui
 import { useNavigate } from 'react-router-dom';
 import { getNotes } from '../services/api.ts';
 import AvatarComponent  from '../components/Avatar/avatar.tsx';    
-import { EditNote, deleteNote } from '../services/api.ts';  	
+import { deleteNote } from '../services/api.ts';  	
 
 export default function ViewNote() {
     const [notes, setNotes ] = useState([]); 
