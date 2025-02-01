@@ -8,7 +8,6 @@ import { EditNote, deleteNote } from '../services/api.ts';
 export default function ViewNote() {
     const [notes, setNotes ] = useState([]); 
     const navigate = useNavigate();
-
       useEffect(() => {const fetchNotes = async () => {
         const token = localStorage.getItem('token'); // Pega o token do localStorage
         try {
@@ -36,6 +35,11 @@ export default function ViewNote() {
       }
     };
 
+    // Funçao para editar a nota
+    const EditNote = async (noteId: string ) => {
+      navigate(`/user/${noteId}`)   
+    }
+
       return (
         <Box maxW="800px" mx="auto" mt="6" >
         <AvatarComponent />
@@ -49,7 +53,7 @@ export default function ViewNote() {
             <Heading as="h3" size="md"> {note.title} </Heading>
             <Text mt={2}> {note.body} </Text>
             <Flex justify="flex-end" mt={2}>
-              <Button colorScheme="blue" size="sm" onClick={EditNote}>
+              <Button colorScheme="blue" size="sm" onClick={() => EditNote(note._id)}>
                 Editar
               </Button>
               <Spacer />
