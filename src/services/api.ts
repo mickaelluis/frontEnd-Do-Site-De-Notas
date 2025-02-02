@@ -97,7 +97,19 @@ export const EditNote = async (noteId: string, title: string, content: string, t
   } catch (error) {
     console.error("Erro ao editar a nota:", error);
   }
-
-
-
 }
+
+export const buscarNotesid = async (noteId: string, token: string | null) => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await axios.get(`${API_URL}/notes/${noteId}`, {
+      headers: {
+        'x-access-token': token,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao buscar notas:", error);
+    throw error;
+  }
+};
