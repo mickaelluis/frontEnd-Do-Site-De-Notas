@@ -112,9 +112,9 @@ export const BuscarNotaPeloId = async (noteId: string | undefined, token: string
   }
 };
 
-export const Buscar = async (value: string,  token: string | null) => {
+export const Buscar = async (value: URLSearchParams,  token: string | null) => {
   try {
-    const response = await axios.get(`${API_URL}/notes/query=${value}`, {
+    const response = await axios.get(`${API_URL}/notes/search?${value}`, {
       headers: {
         'x-access-token': token, // Passando o token no cabeçalho
       },

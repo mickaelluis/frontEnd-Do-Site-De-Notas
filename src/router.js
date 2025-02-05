@@ -22,7 +22,7 @@ const AppRoutes = () => (
         <Route path="/newNotes" element={<Notes />} />
         <Route path="/viewNotes" element={<ViewNotes />} />
         <Route path="/edit-note/:id" element={<EditNotes />} />
-        <Route path="/search/query" element={< ResultadoDeBusca />} />
+        <Route path="/search/" element={< ResultadoDeBusca />} />
         </Route>
     </Routes>
         </AuthProvider>
