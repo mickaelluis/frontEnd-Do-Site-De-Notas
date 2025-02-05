@@ -83,33 +83,44 @@ export const deleteNote = async (noteId: string, token: string | null) => {
 
 export const EditNote = async (noteId: string, title: string, content: string, token: string | null) => {
   try {
-    const token = localStorage.getItem('token');
     const response = await axios.put(`${API_URL}/notes/${noteId}`, {
-      'title': title,
-      'body': content,
+      title: title,
+      body: content, // Aqui você define os dados que quer enviar para o backend
     }, {
       headers: {
         'x-access-token': token, // Enviando o token no cabeçalho
         'Content-Type': 'application/json', // Informando o tipo de conteúdo
       },
     });
+
     return response.data;
   } catch (error) {
     console.error("Erro ao editar a nota:", error);
   }
-}
+};
 
-export const buscarNotesid = async (noteId: string, token: string | null) => {
+export const BuscarNotaPeloId = async (noteId: string | undefined, token: string | null) => {
   try {
-    const token = localStorage.getItem('token');
     const response = await axios.get(`${API_URL}/notes/${noteId}`, {
       headers: {
-        'x-access-token': token,
+        'x-access-token': token, // Passando o token no cabeçalho
       },
     });
     return response.data;
   } catch (error) {
     console.error("Erro ao buscar notas:", error);
-    throw error;
   }
 };
+
+export const Buscar = async (value: string,  token: string | null) => {
+  try {
+    const response = await axios.get(`${API_URL}/notes/query=${value}`, {
+      headers: {
+        'x-access-token': token, // Passando o token no cabeçalho
+      },
+    });
+    return response.data;
+  }catch (error) {
+    console.error("Erro ao buscar notas:", error);
+  }
+}

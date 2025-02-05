@@ -8,6 +8,8 @@ import ViewNotes from './screens/ViewNotes.tsx';
 import EditNotes from './screens/EditNote.tsx';
 import { AuthProvider } from './services/AuthProvider.tsx';
 import PrivateRoute from './services/PrivateRoute.tsx';
+import ResultadoDeBusca from './screens/Resultado.tsx';
+
 
 const AppRoutes = () => (
         <AuthProvider>
@@ -20,6 +22,7 @@ const AppRoutes = () => (
         <Route path="/newNotes" element={<Notes />} />
         <Route path="/viewNotes" element={<ViewNotes />} />
         <Route path="/edit-note/:id" element={<EditNotes />} />
+        <Route path="/search/query" element={< ResultadoDeBusca />} />
         </Route>
     </Routes>
         </AuthProvider>
